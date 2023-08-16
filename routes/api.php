@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource(    '/weather',     \App\Http\Controllers\ApiController::class)
+        ->only(['show']);
+Route::get('/weather/{cityCode}/average', [\App\Http\Controllers\ApiController::class, 'average']);

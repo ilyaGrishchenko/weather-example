@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view(
+        'index',
+        [
+            'sources' => \App\Models\Source::getList(),
+            'cities' => \App\Models\City::getList()
+        ]
+    );
 });
