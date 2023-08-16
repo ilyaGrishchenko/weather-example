@@ -26,15 +26,15 @@ class City
             'timezone' => 4,
             'locationKey' => 295212
         ],
-        # [
-        #     'id' => 2,
-        #     'code' => 'msk',
-        #     'title' => 'Moscow',
-        #     'latitude' => 55.752220,
-        #     'longitude' => 37.615560,
-        #     'timezone' => 4,
-        #     'locationKey' => 294021
-        # ],
+        [
+            'id' => 2,
+            'code' => 'msk',
+            'title' => 'Moscow',
+            'latitude' => 55.752220,
+            'longitude' => 37.615560,
+            'timezone' => 4,
+            'locationKey' => 294021
+        ],
     ];
 
     /**

@@ -34,8 +34,8 @@ class Average implements ResponseInterface
      */
     public function add($sourceRes)
     {
-        foreach ($sourceRes as $item) {
-            if (is_string($item)) {
+        foreach ($sourceRes as $key => $item) {
+            if (is_string($item) || $key == 'error') {
                 continue;
             }
 
@@ -51,18 +51,23 @@ class Average implements ResponseInterface
      */
     public function get()
     {
-        $temp = array_unique($this->temp);
-        $temp = round(array_sum($temp) / count($temp), 1, PHP_ROUND_HALF_DOWN);
-
-        $precArr = [];
-        if (in_array('none', $this->prec)) {
-            $precArr[] = 'Probably';
+        if (count($this->temp) > 0) {
+            $temp = array_unique($this->temp);
+            $temp = round(array_sum($temp) / count($temp), 1, PHP_ROUND_HALF_DOWN);
+        } else {
+            $temp = 0;
         }
-        $precArr = array_merge(
-            $precArr,
-            array_diff($this->prec, ['none'])
-        );
-        $prec = implode( ' ', $precArr);
+
+        $precArr = array_diff($this->prec, ['none']);
+        if (in_array('none', $this->prec) && count($precArr) > 0) {
+            $precArr = array_merge(
+                ['Probably'],
+                $precArr
+            );
+        } else {
+            $precArr = ['No'];
+        }
+        $prec = implode( ' ', array_unique($precArr));
 
         $windSpeed = implode(', ', array_unique($this->windSpeed));
         $windDir = implode(', ', array_unique($this->windDir));

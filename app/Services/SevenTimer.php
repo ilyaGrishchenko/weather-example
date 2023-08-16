@@ -73,6 +73,10 @@ class SevenTimer extends SourceService
     {
         parent::checkResponseErrors();
 
+        if ($this->errors) {
+            return;
+        }
+
         // 7Timer returns string "ERR: no product specified" with 200 status code when error
         // Find str ERR in response
         if (strpos($this->rawServiceResponse->body(), 'ERR') !== false) {
@@ -117,6 +121,10 @@ class SevenTimer extends SourceService
      */
     protected function getAverage($array)
     {
+        if (count($array) == 0) {
+            return 0;
+        }
+
         return array_sum($array) / count($array);
     }
 

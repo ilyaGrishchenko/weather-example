@@ -59,8 +59,6 @@ class ApiController extends Controller
      */
     protected function processingServices($sources, $cityCode, ResponseInterface $response)
     {
-        $res = [];
-
         if (empty($cityCode)) {
             throw new BadRequestHttpException('City id is empty');
         }
